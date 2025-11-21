@@ -1,20 +1,16 @@
-/* Importando fonte moderna */
+/* Arquivo: style.css */
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap");
 
 :root {
-  /* --- PALETA DE CORES ORGANIZATION HELPER --- */
-  --primary: #ffd700; /* Amarelo Ouro Puro */
-  --primary-hover: #ffea00; /* Amarelo Mais Brilhante */
+  --primary: #ffd700;
+  --primary-hover: #ffea00;
   --primary-dim: rgba(255, 215, 0, 0.1);
-
-  --bg-dark: #121212; /* Preto Profundo */
-  --bg-card: #1e1e1e; /* Cinza Escuro */
+  --bg-dark: #121212;
+  --bg-card: #1e1e1e;
   --bg-input: #252525;
-
   --text-white: #ffffff;
   --text-gray: #a0a0a0;
   --text-black: #000000;
-
   --border-radius: 8px;
   --transition: all 0.3s ease;
 }
@@ -24,11 +20,9 @@
   padding: 0;
   box-sizing: border-box;
 }
-
 html {
   scroll-behavior: smooth;
 }
-
 body {
   font-family: "Inter", sans-serif;
   background-color: var(--bg-dark);
@@ -36,7 +30,7 @@ body {
   line-height: 1.6;
 }
 
-/* --- Scrollbar Personalizada --- */
+/* Scrollbar */
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -47,11 +41,8 @@ body {
   background: var(--primary);
   border-radius: 5px;
 }
-::-webkit-scrollbar-thumb:hover {
-  background: var(--primary-hover);
-}
 
-/* --- Header --- */
+/* Header */
 header {
   background-color: rgba(18, 18, 18, 0.95);
   padding: 1.2rem 0;
@@ -63,15 +54,12 @@ header {
   box-shadow: 0 0 15px rgba(255, 215, 0, 0.1);
 }
 
-/* CORREÇÃO AQUI: O container agora é bloco padrão */
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
-  /* Removido display: flex daqui para não quebrar o layout */
 }
 
-/* Aplicamos flex apenas no container DO HEADER */
 header .container {
   display: flex;
   justify-content: space-between;
@@ -80,11 +68,9 @@ header .container {
 
 header h1 {
   font-size: 1.5rem;
-  color: var(--text-white);
   font-weight: 800;
   letter-spacing: -1px;
 }
-
 header h1 .highlight {
   color: var(--primary);
 }
@@ -93,24 +79,20 @@ nav ul {
   display: flex;
   list-style: none;
   gap: 2rem;
-  align-items: center;
 }
-
 nav a {
   color: var(--text-gray);
   text-decoration: none;
   font-weight: 500;
   transition: var(--transition);
-  font-size: 0.95rem;
 }
-
 nav a:hover,
 nav a.active {
   color: var(--primary);
   text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
 }
 
-/* --- Botões --- */
+/* Botões */
 .btn-primary {
   background-color: var(--primary);
   color: var(--text-black);
@@ -123,10 +105,8 @@ nav a.active {
   transition: var(--transition);
   text-transform: uppercase;
   font-size: 0.85rem;
-  letter-spacing: 1px;
   box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
 }
-
 .btn-primary:hover {
   background-color: var(--primary-hover);
   transform: translateY(-2px);
@@ -145,20 +125,13 @@ nav a.active {
   text-transform: uppercase;
   font-size: 0.85rem;
 }
-
 .btn-secondary:hover {
   background: var(--primary);
   color: var(--text-black);
   box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
 }
 
-.full-width {
-  width: 100%;
-  font-size: 1rem;
-  padding: 1rem;
-}
-
-/* --- Hero Section --- */
+/* Hero */
 .hero {
   height: 90vh;
   display: flex;
@@ -170,7 +143,6 @@ nav a.active {
     center/cover fixed;
   margin-bottom: 4rem;
 }
-
 .hero-overlay {
   position: absolute;
   top: 0;
@@ -184,48 +156,36 @@ nav a.active {
     rgba(18, 18, 18, 1) 100%
   );
 }
-
 .hero-content {
   position: relative;
   z-index: 1;
   max-width: 800px;
   padding: 0 20px;
 }
-
 .hero-content h2 {
   font-size: 3.5rem;
   line-height: 1.1;
   margin-bottom: 1.5rem;
   font-weight: 800;
 }
-
 .glow-text {
   color: var(--primary);
   text-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
 }
-
-.hero-content p {
-  font-size: 1.2rem;
-  color: var(--text-gray);
-  margin-bottom: 2.5rem;
-}
-
 .hero-buttons {
   display: flex;
   gap: 1rem;
   justify-content: center;
 }
 
-/* --- Títulos de Seção --- */
+/* Seções */
 section h2 {
   text-align: center;
   font-size: 2.5rem;
   margin-bottom: 3rem;
   color: var(--text-white);
-  display: block; /* Garante que o título ocupe a linha inteira */
   width: 100%;
 }
-
 section h2::after {
   content: "";
   display: block;
@@ -236,16 +196,15 @@ section h2::after {
   box-shadow: 0 0 10px var(--primary);
 }
 
-/* --- Filtros e Inputs --- */
+/* Filtros */
 .filters {
   display: flex;
   justify-content: center;
   gap: 1rem;
   margin-bottom: 3rem;
   flex-wrap: wrap;
-  width: 100%; /* Garante largura total */
+  width: 100%;
 }
-
 input,
 select,
 textarea {
@@ -259,23 +218,20 @@ textarea {
   outline: none;
   transition: var(--transition);
 }
-
 input:focus,
 select:focus,
 textarea:focus {
   border-color: var(--primary);
   box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
 }
-
 .search-input,
 .filter-select {
   min-width: 250px;
 }
 
-/* --- Grid de Produtos (Onde estava o bug) --- */
+/* GRID DE PRODUTOS  */
 .products-grid {
   display: grid;
-  /* Ajuste para garantir alinhamento correto */
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 2rem;
   padding-bottom: 4rem;
@@ -292,13 +248,11 @@ textarea:focus {
   display: flex;
   flex-direction: column;
 }
-
 .product-card:hover {
   transform: translateY(-10px);
   border-color: var(--primary);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
-
 .product-card:hover::before {
   content: "";
   position: absolute;
@@ -317,7 +271,6 @@ textarea:focus {
   opacity: 0.8;
   transition: var(--transition);
 }
-
 .product-card:hover .product-image {
   opacity: 1;
 }
@@ -328,31 +281,24 @@ textarea:focus {
   display: flex;
   flex-direction: column;
 }
-
 .product-card h3 {
   font-size: 1.25rem;
   margin-bottom: 0.5rem;
-  color: var(--text-white);
 }
-
 .product-description {
   color: var(--text-gray);
   font-size: 0.9rem;
   margin-bottom: 1rem;
-  height: 3em; /* Altura fixa para alinhar cards */
+  height: 3em;
   overflow: hidden;
 }
-
 .product-price {
   font-size: 1.5rem;
   color: var(--primary);
   font-weight: 700;
-  display: block;
-  margin-bottom: 0.5rem;
+  margin-top: auto;
   text-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
-  margin-top: auto; /* Empurra o preço para o fundo do card */
 }
-
 .product-category {
   display: inline-block;
   background: var(--primary-dim);
@@ -366,13 +312,39 @@ textarea:focus {
   align-self: flex-start;
 }
 
-/* --- Formulário --- */
+/* Botão de Excluir  */
+.delete-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #ff4444;
+  border: 1px solid #ff4444;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+  opacity: 0.8;
+}
+.delete-btn:hover {
+  background-color: #ff4444;
+  color: white;
+  transform: scale(1.1);
+  opacity: 1;
+  box-shadow: 0 0 10px rgba(255, 68, 68, 0.6);
+}
+
+/* Formulário */
 .form-section {
   background: #0a0a0a;
   padding: 80px 0;
   border-top: 1px solid #222;
 }
-
 .product-form {
   background: var(--bg-card);
   padding: 2.5rem;
@@ -381,11 +353,9 @@ textarea:focus {
   max-width: 700px;
   margin: 0 auto;
 }
-
 .form-group {
   margin-bottom: 1.5rem;
 }
-
 .form-row {
   display: flex;
   gap: 1rem;
@@ -393,7 +363,6 @@ textarea:focus {
 .form-row .form-group {
   flex: 1;
 }
-
 label {
   display: block;
   margin-bottom: 0.5rem;
@@ -401,15 +370,13 @@ label {
   font-size: 0.9rem;
   font-weight: 600;
 }
-
-.error-message {
-  color: #ff4444;
-  font-size: 0.8rem;
-  margin-top: 0.3rem;
-  display: block;
+.full-width {
+  width: 100%;
+  font-size: 1rem;
+  padding: 1rem;
 }
 
-/* --- Footer --- */
+/* Footer */
 footer {
   background: black;
   padding: 2rem 0;
@@ -418,12 +385,11 @@ footer {
   border-top: 2px solid var(--primary);
 }
 
-/* --- Animações de Entrada --- */
+/* Animações */
 .reveal {
   animation: fadeInUp 0.8s ease forwards;
   opacity: 0;
 }
-
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -435,7 +401,6 @@ footer {
   }
 }
 
-/* Responsividade */
 @media (max-width: 768px) {
   .hero-content h2 {
     font-size: 2.5rem;
@@ -443,15 +408,8 @@ footer {
   .form-row {
     flex-direction: column;
   }
-  .container {
-    display: block; /* Garante que continue bloco no mobile */
-    padding: 0 15px;
-  }
   header .container {
     flex-direction: column;
-    gap: 1rem;
-  }
-  nav ul {
     gap: 1rem;
   }
   .hero-buttons {
