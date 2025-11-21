@@ -7,5 +7,6 @@ CREATE TABLE produtos (
     preco DECIMAL(10, 2) NOT NULL,
     categoria VARCHAR(50) NOT NULL,
     imagem_url VARCHAR(512),
-    data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,,
+    quantidade INT NOT NULL DEFAULT 1
 );
