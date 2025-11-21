@@ -1,0 +1,460 @@
+/* Importando fonte moderna */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap");
+
+:root {
+  /* --- PALETA DE CORES ORGANIZATION HELPER --- */
+  --primary: #ffd700; /* Amarelo Ouro Puro */
+  --primary-hover: #ffea00; /* Amarelo Mais Brilhante */
+  --primary-dim: rgba(255, 215, 0, 0.1);
+
+  --bg-dark: #121212; /* Preto Profundo */
+  --bg-card: #1e1e1e; /* Cinza Escuro */
+  --bg-input: #252525;
+
+  --text-white: #ffffff;
+  --text-gray: #a0a0a0;
+  --text-black: #000000;
+
+  --border-radius: 8px;
+  --transition: all 0.3s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-white);
+  line-height: 1.6;
+}
+
+/* --- Scrollbar Personalizada --- */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-hover);
+}
+
+/* --- Header --- */
+header {
+  background-color: rgba(18, 18, 18, 0.95);
+  padding: 1.2rem 0;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 2px solid var(--primary);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.1);
+}
+
+/* CORREÇÃO AQUI: O container agora é bloco padrão */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  /* Removido display: flex daqui para não quebrar o layout */
+}
+
+/* Aplicamos flex apenas no container DO HEADER */
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1 {
+  font-size: 1.5rem;
+  color: var(--text-white);
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+header h1 .highlight {
+  color: var(--primary);
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+  align-items: center;
+}
+
+nav a {
+  color: var(--text-gray);
+  text-decoration: none;
+  font-weight: 500;
+  transition: var(--transition);
+  font-size: 0.95rem;
+}
+
+nav a:hover,
+nav a.active {
+  color: var(--primary);
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+/* --- Botões --- */
+.btn-primary {
+  background-color: var(--primary);
+  color: var(--text-black);
+  padding: 0.7rem 1.5rem;
+  border-radius: var(--border-radius);
+  font-weight: 700;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5);
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 2px solid var(--primary);
+  color: var(--primary);
+  padding: 0.7rem 1.5rem;
+  border-radius: var(--border-radius);
+  font-weight: 700;
+  text-decoration: none;
+  transition: var(--transition);
+  text-transform: uppercase;
+  font-size: 0.85rem;
+}
+
+.btn-secondary:hover {
+  background: var(--primary);
+  color: var(--text-black);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+}
+
+.full-width {
+  width: 100%;
+  font-size: 1rem;
+  padding: 1rem;
+}
+
+/* --- Hero Section --- */
+.hero {
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  background: url("https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1920&q=80")
+    center/cover fixed;
+  margin-bottom: 4rem;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(18, 18, 18, 0.9) 0%,
+    rgba(18, 18, 18, 0.7) 50%,
+    rgba(18, 18, 18, 1) 100%
+  );
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  padding: 0 20px;
+}
+
+.hero-content h2 {
+  font-size: 3.5rem;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  font-weight: 800;
+}
+
+.glow-text {
+  color: var(--primary);
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  color: var(--text-gray);
+  margin-bottom: 2.5rem;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+/* --- Títulos de Seção --- */
+section h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  color: var(--text-white);
+  display: block; /* Garante que o título ocupe a linha inteira */
+  width: 100%;
+}
+
+section h2::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 4px;
+  background: var(--primary);
+  margin: 15px auto 0;
+  box-shadow: 0 0 10px var(--primary);
+}
+
+/* --- Filtros e Inputs --- */
+.filters {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+  width: 100%; /* Garante largura total */
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 1rem;
+  background: var(--bg-input);
+  border: 1px solid #333;
+  border-radius: var(--border-radius);
+  color: var(--text-white);
+  font-size: 1rem;
+  outline: none;
+  transition: var(--transition);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+}
+
+.search-input,
+.filter-select {
+  min-width: 250px;
+}
+
+/* --- Grid de Produtos (Onde estava o bug) --- */
+.products-grid {
+  display: grid;
+  /* Ajuste para garantir alinhamento correto */
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+  padding-bottom: 4rem;
+  width: 100%;
+}
+
+.product-card {
+  background: var(--bg-card);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #333;
+  transition: var(--transition);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card:hover {
+  transform: translateY(-10px);
+  border-color: var(--primary);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.product-card:hover::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--primary);
+  box-shadow: 0 0 15px var(--primary);
+}
+
+.product-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  opacity: 0.8;
+  transition: var(--transition);
+}
+
+.product-card:hover .product-image {
+  opacity: 1;
+}
+
+.card-content {
+  padding: 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-white);
+}
+
+.product-description {
+  color: var(--text-gray);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  height: 3em; /* Altura fixa para alinhar cards */
+  overflow: hidden;
+}
+
+.product-price {
+  font-size: 1.5rem;
+  color: var(--primary);
+  font-weight: 700;
+  display: block;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+  margin-top: auto; /* Empurra o preço para o fundo do card */
+}
+
+.product-category {
+  display: inline-block;
+  background: var(--primary-dim);
+  color: var(--primary);
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  margin-bottom: 10px;
+  align-self: flex-start;
+}
+
+/* --- Formulário --- */
+.form-section {
+  background: #0a0a0a;
+  padding: 80px 0;
+  border-top: 1px solid #222;
+}
+
+.product-form {
+  background: var(--bg-card);
+  padding: 2.5rem;
+  border-radius: 16px;
+  border: 1px solid #333;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+}
+.form-row .form-group {
+  flex: 1;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--text-gray);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.error-message {
+  color: #ff4444;
+  font-size: 0.8rem;
+  margin-top: 0.3rem;
+  display: block;
+}
+
+/* --- Footer --- */
+footer {
+  background: black;
+  padding: 2rem 0;
+  text-align: center;
+  color: var(--text-gray);
+  border-top: 2px solid var(--primary);
+}
+
+/* --- Animações de Entrada --- */
+.reveal {
+  animation: fadeInUp 0.8s ease forwards;
+  opacity: 0;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .hero-content h2 {
+    font-size: 2.5rem;
+  }
+  .form-row {
+    flex-direction: column;
+  }
+  .container {
+    display: block; /* Garante que continue bloco no mobile */
+    padding: 0 15px;
+  }
+  header .container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  nav ul {
+    gap: 1rem;
+  }
+  .hero-buttons {
+    flex-direction: column;
+  }
+}

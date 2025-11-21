@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Organization Helper - Seu Inventário</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📦</text></svg>"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <h1>📦 Organization <span class="highlight">Helper</span></h1>
+        <nav>
+          <ul>
+            <li><a href="#home" class="active">Início</a></li>
+            <li><a href="#products">Meus Itens</a></li>
+            <li><a href="#demo-form" class="btn-primary">Novo Item</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section id="home" class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+          <h2>
+            Organize sua vida com o<br />
+            <span class="glow-text">Organization Helper</span>
+          </h2>
+          <p>
+            O sistema definitivo para gerenciar seus itens pessoais, estoque ou
+            coleções.
+          </p>
+          <div class="hero-buttons">
+            <a href="#products" class="btn-primary">Ver Inventário</a>
+            <a href="#demo-form" class="btn-secondary">Adicionar Item</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="products" class="products-section">
+        <div class="container reveal">
+          <h2>📦 Itens Cadastrados</h2>
+          <div class="filters">
+            <input
+              type="text"
+              id="search"
+              placeholder="🔍 Buscar no inventário..."
+              class="search-input"
+            />
+            <select id="category-filter" class="filter-select">
+              <option value="">Todas as categorias</option>
+              <option value="eletronicos">Eletrônicos</option>
+              <option value="livros">Livros</option>
+              <option value="roupas">Roupas</option>
+              <option value="casa">Casa e Decoração</option>
+            </select>
+          </div>
+
+          <div class="products-grid" id="products-grid">
+            <div class="loading-message">
+              <div class="spinner"></div>
+              <p>Carregando seus itens...</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="demo-form" class="form-section">
+        <div class="container reveal">
+          <h2>📝 Adicionar Novo Item</h2>
+
+          <form
+            id="product-form"
+            class="product-form"
+            action="cadastrar.php"
+            method="POST"
+          >
+            <div class="form-group">
+              <label for="product-name">Nome do Item</label>
+              <input
+                type="text"
+                id="product-name"
+                name="product-name"
+                placeholder="Ex: Notebook Dell, Caixa de Ferramentas..."
+                required
+              />
+              <span class="error-message" id="name-error"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="product-description">Descrição / Observações</label>
+              <textarea
+                id="product-description"
+                name="product-description"
+                rows="3"
+                placeholder="Detalhes sobre o estado do item, local onde está guardado, etc."
+              ></textarea>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="product-price">Valor Estimado (R$)</label>
+                <input
+                  type="number"
+                  id="product-price"
+                  name="product-price"
+                  step="0.01"
+                  min="0"
+                  placeholder="0.00"
+                  required
+                />
+                <span class="error-message" id="price-error"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="product-category">Categoria</label>
+                <select id="product-category" name="product-category" required>
+                  <option value="">Selecione...</option>
+                  <option value="eletronicos">Eletrônicos</option>
+                  <option value="livros">Livros</option>
+                  <option value="roupas">Roupas</option>
+                  <option value="casa">Casa / Organização</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="product-image">Foto do Item (URL)</label>
+              <input
+                type="url"
+                id="product-image"
+                name="product-image"
+                placeholder="https://..."
+              />
+            </div>
+
+            <button type="submit" class="btn-primary full-width">
+              Salvar no Inventário
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <footer>
+        <div class="container">
+          <p>
+            &copy; 2024 <strong>Organization Helper</strong> - Sistema de Gestão
+          </p>
+        </div>
+      </footer>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
