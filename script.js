@@ -1,116 +1,82 @@
 // Arquivo: script.js
-
-// Variáveis Globais
 let products = [];
 const productsGrid = document.getElementById("products-grid");
 const searchInput = document.getElementById("search");
 const categoryFilter = document.getElementById("category-filter");
-const productForm = document.getElementById("product-form");
+const editModal = document.getElementById("edit-modal");
 
-// Mapeamento de nomes para exibição mais bonita
 const categoryNames = {
   eletronicos: "Eletrônicos",
-  livros: "Livros e Documentos",
+  livros: "Livros e Docs",
   roupas: "Vestuário",
-  casa: "Casa e Decoração",
+  casa: "Casa e Diversos",
 };
 
-// Inicialização
 document.addEventListener("DOMContentLoaded", function () {
   fetchProductsFromDB();
   setupEventListeners();
 });
 
-// --- 1. BUSCAR PRODUTOS (READ) ---
 async function fetchProductsFromDB() {
   try {
-    // Adiciona um loading visual enquanto carrega
     productsGrid.innerHTML =
-      '<div style="text-align:center; width:100%; color: #FFD700;">Carregando inventário...</div>';
-
+      '<div style="text-align:center; width:100%; color: #FFD700;">Carregando...</div>';
     const response = await fetch("produtos.php");
-
     if (response.ok) {
       products = await response.json();
       renderProducts(products);
-    } else {
-      throw new Error("Erro na resposta do servidor");
     }
   } catch (error) {
     console.error("Erro:", error);
-    productsGrid.innerHTML = `<p style="color:#ff4444; text-align:center; grid-column: 1/-1;">Erro ao conectar com o banco de dados.</p>`;
   }
 }
 
-// --- 2. CONFIGURAR EVENTOS ---
 function setupEventListeners() {
-  // Filtros de pesquisa e categoria
   searchInput.addEventListener("input", filterProducts);
   categoryFilter.addEventListener("change", filterProducts);
-
-  // Validação extra no formulário (Opcional, pois o HTML já tem 'required')
-  if (productForm) {
-    productForm.addEventListener("submit", function (e) {
-      const price = document.getElementById("product-price").value;
-      if (price < 0) {
-        e.preventDefault();
-        alert("O valor não pode ser negativo!");
-      }
-    });
-  }
+  document.getElementById("edit-form").addEventListener("submit", saveEdit);
 }
 
-// --- 3. RENDERIZAR NA TELA ---
 function renderProducts(productsToRender) {
   productsGrid.innerHTML = "";
-
   if (productsToRender.length === 0) {
-    productsGrid.innerHTML = `<div style="color:#888; text-align:center; grid-column: 1/-1; padding: 2rem;">
-            <p>Nenhum item encontrado.</p>
-        </div>`;
+    productsGrid.innerHTML = `<div style="color:#888; text-align:center; grid-column: 1/-1;">Nenhum item.</div>`;
     return;
   }
-
   productsToRender.forEach((product, index) => {
     const card = createProductCard(product);
-    // Adiciona um pequeno atraso na animação para efeito cascata
     card.style.animationDelay = `${index * 0.1}s`;
     productsGrid.appendChild(card);
   });
 }
 
-// --- 4. CRIAR O CARD HTML ---
 function createProductCard(product) {
   const card = document.createElement("div");
   card.className = "product-card reveal";
-
-  // Formata o preço para o padrão brasileiro
   const priceFormatted = parseFloat(product.preco).toFixed(2).replace(".", ",");
-
-  // Ícone SVG de Lixeira
-  const trashIcon = `
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="3 6 5 6 21 6"></polyline>
-            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-        </svg>
-    `;
+  const qtd = product.quantidade ? product.quantidade : 1;
+  const trashIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>`;
+  const editIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>`;
 
   card.innerHTML = `
-        <button class="delete-btn" onclick="deleteProduct(${
-          product.id
-        })" title="Excluir Item">
-            ${trashIcon}
-        </button>
-
+        <div class="card-actions">
+            <button class="edit-btn" onclick="openEditModal(${
+              product.id
+            })" title="Editar">${editIcon}</button>
+            <button class="delete-btn" onclick="deleteProduct(${
+              product.id
+            })" title="Excluir">${trashIcon}</button>
+        </div>
         <img src="${product.imagem_url}" alt="${
     product.nome
-  }" class="product-image" 
-             onerror="this.src='https://images.unsplash.com/photo-1600607686527-6fb886090705?w=400&h=300&fit=crop'">
-        
+  }" class="product-image" onerror="this.src='https://images.unsplash.com/photo-1600607686527-6fb886090705?w=400&h=300&fit=crop'">
         <div class="card-content">
-            <span class="product-category">${
-              categoryNames[product.categoria] || product.categoria
-            }</span>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 5px;">
+                <span class="product-category">${
+                  categoryNames[product.categoria] || product.categoria
+                }</span>
+                <span style="font-size: 0.85rem; color: #FFD700; border: 1px solid #FFD700; padding: 2px 8px; border-radius: 10px;">Qtd: ${qtd}</span>
+            </div>
             <h3>${product.nome}</h3>
             <p class="product-description">${
               product.descricao
@@ -120,15 +86,12 @@ function createProductCard(product) {
             <div class="product-price">R$ ${priceFormatted}</div>
         </div>
     `;
-
   return card;
 }
 
-// --- 5. FILTRAGEM ---
 function filterProducts() {
   const searchTerm = searchInput.value.toLowerCase();
   const selectedCategory = categoryFilter.value;
-
   const filteredProducts = products.filter((product) => {
     const matchesSearch =
       product.nome.toLowerCase().includes(searchTerm) ||
@@ -136,39 +99,65 @@ function filterProducts() {
         product.descricao.toLowerCase().includes(searchTerm));
     const matchesCategory =
       !selectedCategory || product.categoria === selectedCategory;
-
     return matchesSearch && matchesCategory;
   });
-
   renderProducts(filteredProducts);
 }
 
-// --- 6. EXCLUIR PRODUTO (CORRIGIDO COM POST) ---
 async function deleteProduct(id) {
-  const confirmacao = confirm("Deseja excluir este item permanentemente?");
-
-  if (confirmacao) {
+  if (confirm("Excluir item?")) {
     try {
-      // Cria um formulário virtual para enviar o ID via POST
       const formData = new FormData();
       formData.append("id", id);
-
       const response = await fetch("excluir.php", {
         method: "POST",
         body: formData,
       });
-
-      const data = await response.json();
-
-      if (response.ok && data.status === "sucesso") {
-        // Recarrega a lista do banco de dados para atualizar a tela
-        fetchProductsFromDB();
-      } else {
-        alert("Erro ao excluir: " + (data.mensagem || "Erro desconhecido"));
-      }
+      if (response.ok) fetchProductsFromDB();
     } catch (error) {
-      console.error("Erro de conexão:", error);
-      alert("Erro ao tentar conectar com o servidor.");
+      console.error(error);
     }
   }
 }
+
+function openEditModal(id) {
+  const product = products.find((p) => p.id == id);
+  if (product) {
+    document.getElementById("edit-id").value = product.id;
+    document.getElementById("edit-name").value = product.nome;
+    document.getElementById("edit-description").value = product.descricao;
+    document.getElementById("edit-price").value = product.preco;
+    document.getElementById("edit-quantity").value = product.quantidade;
+    document.getElementById("edit-category").value = product.categoria;
+    document.getElementById("edit-image").value = product.imagem_url;
+    editModal.style.display = "flex";
+  }
+}
+
+function closeEditModal() {
+  editModal.style.display = "none";
+}
+
+async function saveEdit(e) {
+  e.preventDefault();
+  try {
+    const response = await fetch("editar.php", {
+      method: "POST",
+      body: new FormData(document.getElementById("edit-form")),
+    });
+    const data = await response.json();
+    if (data.status === "sucesso") {
+      closeEditModal();
+      fetchProductsFromDB();
+      alert("Item atualizado!");
+    } else {
+      alert("Erro ao atualizar.");
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+window.onclick = function (event) {
+  if (event.target == editModal) closeEditModal();
+};
