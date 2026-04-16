@@ -1,36 +1,61 @@
 # Organization Helper
 
 ## 📌 Descrição
-Sistema web desenvolvido para organização e gerenciamento de dados/produtos, permitindo cadastro, edição, listagem e exclusão de informações.
+Sistema web desenvolvido para gerenciamento de itens e organização pessoal, permitindo cadastro, edição, listagem e exclusão de dados.
+
+O sistema simula um ambiente real de controle de estoque ou organização de objetos pessoais.
+
+---
 
 ## 🚀 Funcionalidades
-- Cadastro de itens
-- Listagem de dados
-- Edição de registros
-- Exclusão de registros
-- Integração com banco de dados
+- Cadastro de itens com nome, descrição, valor e categoria
+- Listagem de itens cadastrados
+- Filtro por categoria
+- Busca de itens
+- Exclusão e edição de dados
+- Interface administrativa simples
 
-## 🛠️ Tecnologias
+---
+
+## 🛠️ Tecnologias utilizadas
 - HTML
 - CSS
 - JavaScript
 - PHP
-- SQL
+- SQL (Banco de dados)
 
-## 💻 Meu papel no projeto
-- Desenvolvimento das interfaces (Front-End)
-- Implementação das funcionalidades com PHP
+---
+
+## 💻 Diferenciais do projeto
 - Integração com banco de dados
-- Organização da estrutura do sistema
+- Sistema CRUD completo
+- Interface moderna e responsiva
+- Simulação de sistema real de gestão
+
+---
+
+## 💼 Aplicação prática
+Este projeto pode ser utilizado como base para:
+- Sistemas de controle de estoque
+- Gerenciamento de produtos
+- Organização de dados pessoais
+
+---
 
 ## ⚙️ Como executar
-1. Baixe o projeto
-2. Utilize um servidor local (XAMPP, WAMP ou similar)
-3. Importe o arquivo `sql.sql` no banco de dados
-4. Execute o projeto no navegador
+1. Instalar XAMPP ou similar
+2. Importar o arquivo `sql.sql` no banco de dados
+3. Rodar o projeto em servidor local
+4. Acessar via navegador
+
+---
 
 ## 📸 Preview
-Adicione aqui prints do sistema funcionando
 
-## 💡 Objetivo
-Projeto desenvolvido para prática acadêmica e desenvolvimento de habilidades em programação web.
+### Tela inicial
+![home](preview.png)
+
+### Cadastro de itens
+![cadastro](cadastro.png)
+
+
